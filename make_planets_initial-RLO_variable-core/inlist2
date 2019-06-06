@@ -1,0 +1,53 @@
+
+! inlist_test_rlo
+
+
+
+&star_job
+
+      !mesa_dir = ''
+      show_log_description_at_start = .false.
+
+      load_saved_model = .true.
+      saved_model_name = "star_init.mod"
+
+      set_initial_age = .true.
+      initial_age = 3000000.0 ! in years
+
+      set_initial_model_number = .true.
+      initial_model_number = 0
+
+      kappa_file_prefix = 'gs98'
+
+      pgstar_flag = .false.
+
+/ ! end of star_job namelist
+
+
+
+&controls
+
+      extra_terminal_output_file = 'log2' 
+      photo_directory = 'photos2'
+      log_directory = 'LOGS2'
+
+      x_ctrl(1)=100.0
+
+      profile_interval = 50
+      history_interval = 1
+      terminal_cnt = 10
+      write_header_frequency = 10
+
+       RGB_wind_scheme = '' ! empty string means no RGB wind
+       AGB_wind_scheme = '' ! empty string means no AGB wind
+      
+      varcontrol_target = 1d-3
+      
+
+/ ! end of controls namelist
+
+
+&pgstar
+
+
+/ ! end of pgstar namelist

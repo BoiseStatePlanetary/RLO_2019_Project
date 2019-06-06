@@ -1,0 +1,5 @@
+           4 models.    lines hold model number, priority, and profile number.
+          96           3           1
+         100           1           2
+         102           3           3
+         196           3           4

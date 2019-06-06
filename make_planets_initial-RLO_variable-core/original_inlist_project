@@ -1,0 +1,54 @@
+&binary_job
+   inlist_names(1) = 'inlist1' 
+   inlist_names(2) = 'inlist2'
+
+   which_for_pgstar = 0 ! 0 means none; < 0 means all; i > 0 means star i
+   evolve_both_stars = .true.
+   stopping_age = 10000000000.0 !10 Gyrs
+
+/ ! end of binary_job namelist
+
+&binary_controls
+   initial_period_in_days = 3.0
+   smallest_mass = 1.e-10 ! 
+
+   keep_donor_fixed = .true.
+   mdot_scheme = "roche_lobe"
+   implicit_min_mdot = 1d-99
+
+   !2014 Nov 19 -- Added by Brian Jackson (bjackson@boisestate.edu)
+   !  in hopes to smooth the otherwise rough evolution
+   !  
+   !  Check ~/Downloads/binary_controls.defaults (which Brian got from 
+   !  Pablo Marchant) for a short discussion of this parameter.
+   !2014 Dec 27 -- Brian cranked implicit_scheme_tolerance down by 10
+   !  because the calculation was stalling out
+
+   !Then tried reverting to the default
+   !implicit_scheme_tolerance = 1d-3
+
+   ! mesa 6794
+   ! Tauris & van den Heuvel 2003 section 16.4.1,
+   ! transfer efficiency is given by 1-alpha-beta-gamma.
+   mass_transfer_alpha = 0.0d0 ! fraction of mass lost from the vicinity of the donor as fast wind
+   mass_transfer_beta = 0.0d0 ! fraction of mass lost from the vicinity of the accretor as fast wind
+   mass_transfer_delta = 0.0d0 ! fraction of mass lost from circumbinary coplanar toroid
+   mass_transfer_gamma = 0.0d0 ! radius of the circumbinary coplanar toroid is
+                               ! mass_transfer_gamma**2 * orbital_separation
+
+   jdot_multiplier = 1d0
+   do_jdot_mb = .false.
+   do_jdot_gr = .false.
+   do_jdot_ml = .false.
+   do_jdot_tide = .true.
+   do_jdot_ls = .false.
+
+   include_accretor_mb = .false.
+
+   tidal_Q = 1.0e6 ! no tidal braking if tidal_Q = 0
+   R_companion = 1 ! fixed companion radius in Rsun for tidal braking
+
+   limit_retention_by_mdot_edd = .false.
+   max_tries_to_achieve = 50
+/ ! end of binary_controls namelist
+
